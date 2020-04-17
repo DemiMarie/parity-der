@@ -357,9 +357,7 @@ mod tests {
                 Ok(())
             })
             .unwrap();
-        let b = include_bytes!(
-            "/mnt/removable/parity/libp2p/rust-libp2p/misc/x509/src/verifier/data/alg-ed25519.der"
-        );
+        let b = include_bytes!("../alg-ed25519.der");
         let now = std::time::SystemTime::now()
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap()
