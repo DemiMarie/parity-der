@@ -73,10 +73,13 @@ impl<'a> OutBuf<'a> {
         }
     }
 }
+
 pub struct FmtBuf<'a>(Option<&'a mut [u8]>);
+
 impl<'a> FmtBuf<'a> {
     pub fn new(slice: &'a mut [u8]) -> Self { Self(Some(slice)) }
 }
+
 impl<'a> core::fmt::Write for FmtBuf<'a> {
     fn write_str(&mut self, s: &str) -> core::fmt::Result {
         let slice = self.0.take().unwrap();
@@ -87,6 +90,7 @@ impl<'a> core::fmt::Write for FmtBuf<'a> {
         Ok(())
     }
 }
+
 pub fn encode(data: &dyn Fn(&mut OutBuf)) -> Vec<u8> {
     let mut buf = OutBuf(None, 0);
     data(&mut buf);
